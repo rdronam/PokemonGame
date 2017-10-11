@@ -45,10 +45,10 @@ function extractPokemon(pokemonNumber) {
 			// SQL - INSERT INTO statement
 			connection.query(
 				"INSERT INTO tbl_pokemon SET ?", {
-					pokemon_name: JSON.parse(body).name,
-					pokemon_number: parseInt(JSON.parse(body).id),
-					pokemon_img_front: JSON.parse(body).sprites.front_default,
-					pokemon_img_back: JSON.parse(body).sprites.back_default
+					name: JSON.parse(body).name,
+					number: parseInt(JSON.parse(body).id),
+					img_front: JSON.parse(body).sprites.front_default,
+					img_back: JSON.parse(body).sprites.back_default
 				},
 				function (err, res) {
 					// callback
