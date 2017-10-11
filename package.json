@@ -21,5 +21,13 @@
   "bugs": {
     "url": "https://github.com/rdronam/PokemonGame/issues"
   },
-  "homepage": "https://github.com/rdronam/PokemonGame#readme"
+  "homepage": "https://github.com/rdronam/PokemonGame#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "mysql": "^2.15.0",
+    "mysql2": "^1.4.2",
+    "request": "^2.83.0",
+    "sequelize": "^4.13.8"
+  }
 }

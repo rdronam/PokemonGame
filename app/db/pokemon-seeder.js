@@ -19,8 +19,8 @@ var connection = mysql.createConnection({
 	host: "localhost",
 	port: 3306,
 	user: "root",
-	password: "DON'T_RUN",
-	database: "pokemon"
+	password: "Wagstaff2017",
+	database: "pokemon_db"
 });
 
 // Connect to the database
@@ -31,8 +31,8 @@ connection.connect(function (err) {
 	// if connected correctly
 	console.log("Welcome to Kanto \n You are connected as id " + connection.threadId + "\n");
 
-	for (var i = 1; i <= 151; i++) {
-		extractPokemon(1); // begin	
+	for (i = 1; i <= 151; i++) {
+		extractPokemon(i); // begin	
 	}
 });
 
@@ -44,11 +44,13 @@ function extractPokemon(pokemonNumber) {
 		if (!error && response.statusCode === 200) {
 			// SQL - INSERT INTO statement
 			connection.query(
-				"INSERT INTO tbl_pokemon SET ?", {
+				"INSERT INTO pokemons SET ?", {
 					name: JSON.parse(body).name,
 					number: parseInt(JSON.parse(body).id),
 					img_front: JSON.parse(body).sprites.front_default,
-					img_back: JSON.parse(body).sprites.back_default
+					img_back: JSON.parse(body).sprites.back_default,
+					createdAt: "0000:00:00 00:00:00",
+					updatedAt: "0000:00:00 00:00:00"
 				},
 				function (err, res) {
 					// callback
