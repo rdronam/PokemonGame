@@ -42,25 +42,6 @@ $('.tab a').on('click', function (e) {
   
 });
 
-
 $( ".form" ).click(function() {
-  app.get("/api/trainer1", function(req, res){
-  res.json(friends);
-});
-
-app.post("/api/trainer1", function(req, res) {
-    db.Post.create(req.body).then(function(dbPost) {
-      res.json(dbPost);
-    });
- });
-
-app.post("/api/trainer2", function(req, res) {
-    db.Post.create(req.body).then(function(dbPost) {
-      res.json(dbPost);
-    });
- });
-
   $( "#target" ).submit();
 });
-
-
