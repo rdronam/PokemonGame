@@ -1,22 +1,15 @@
 var db = require("../models");
+var Trainer = require("../controllers/pokemon.js");
 
 module.exports = function(App) {
-	App.get("/trainers/:trainerId?", function(req, res) {
-		var trainerId = req.params.trainerId;
-		console.log(trainerId);
-		if (trainerId) {
+	App.get("/trainers/:trainerName?", function(req, res) {
+		var trainerName = req.params.trainerName;
+		if (trainerName) {
 			db.Trainer.findOne({
 				where: {
-					id: trainerId
+					name: trainerName
 				}
 			}).then(function(dbTrainer) {
-				console.log(dbTrainer.dataValues.name);
-				console.log(dbTrainer.dataValues.level);
-				res.json(dbTrainer);
-			});
-		}
-		else {
-			db.Trainer.findAll({}).then(function(dbTrainer) {
 				res.json(dbTrainer);
 			});
 		}
