@@ -13,13 +13,14 @@ module.exports = {
 				number: trainerInfo.pokemon_number
 			}
 			}).then(function(dbPokemon) {
+			console.log(dbPokemon.dataValues);
 			poke_Name = dbPokemon.dataValues.name;
 			poke_Level = trainerInfo.level;
 			poke_HP_C = trainerInfo.health_points_current,
 			poke_HP_M = trainerInfo.health_points_max,
 			poke_Atk = trainerInfo.attack,
 			poke_Exp = trainerInfo.experience,
-			poke_Img_Back = db.Pokemon.dataValues.img_back
+			poke_Img_Back = dbPokemon.dataValues.img_back
 			var poke = {
 				name: poke_Name,
 				level: poke_Level,
