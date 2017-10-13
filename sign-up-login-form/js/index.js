@@ -41,3 +41,7 @@ $('.tab a').on('click', function (e) {
   $(target).fadeIn(600);
   
 });
+
+ $.get( "/trainers/"+formstuff, function() {
+  alert( "success" );
+})

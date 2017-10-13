@@ -1,7 +1,6 @@
 module.exports = function(sequelize, DataTypes) {
 	var Trainer = sequelize.define("Trainer", {
 		name: DataTypes.STRING,
-		money: DataTypes.INTEGER,
 		pokemon_number: DataTypes.INTEGER,
 		level: DataTypes.INTEGER,
 		health_points_current: DataTypes.INTEGER,
