@@ -13,7 +13,6 @@ module.exports = {
 				number: trainerInfo.pokemon_number
 			}
 			}).then(function(dbPokemon) {
-			console.log(dbPokemon.dataValues);
 			poke_Name = dbPokemon.dataValues.name;
 			poke_Level = trainerInfo.level;
 			poke_HP_C = trainerInfo.health_points_current,
@@ -97,9 +96,14 @@ module.exports = {
 			TrainerPokeImgBack: trainerPoke.img_back,
 			RandomPokeImgFront: randomPoke.img_front
 		}
-		console.log(batteLog.Winner);
-		console.log("Trainer Attacks " + batteLog.Results[0]);
-		console.log("Random Poke Attacks " + batteLog.Results[1]);
+		if (winner == 1) {
+			console.log("Congratz! You won!");
+		}
+		else {
+			console.log("Too bad, you lost!");
+		}
+		console.log("Trainer Attacks: " + batteLog.Results[0]);
+		console.log("Random Poke Attacks: " + batteLog.Results[1]);
 		return batteLog;
 		function randomAttack(level, low, high) {
 			return (Math.floor((Math.random() * (high - low) + low) + (5 * (level - 1))));

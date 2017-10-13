@@ -14,6 +14,7 @@ App.use(Express.static("./app/public"));
 
 require("./app/routes/html-routes.js")(App);
 require("./app/routes/trainers-api-routes.js")(App);
+require("./app/routes/pokemon-api-routes.js")(App);
 
 db.sequelize.sync({ force: false }).then(function() {
   App.listen(PORT, function() {
