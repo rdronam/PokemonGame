@@ -4,7 +4,7 @@ module.exports = function(App) {
 		res.sendFile(Path.join(__dirname, "../public/index.html"));
 	});
 	App.get("/battle", function(req, res) {
-		res.sendFile(Path.join(__dirname, "../public/battle.html"));
+		res.render(Path.join(__dirname, "../views/battle.ejs"));
 	});
 	
 	
