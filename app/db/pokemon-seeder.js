@@ -19,7 +19,7 @@ var connection = mysql.createConnection({
 	host: "localhost",
 	port: 3306,
 	user: "root",
-	password: "Wagstaff2017",
+	password: "Firas123",
 	database: "pokemon_db"
 });
 
