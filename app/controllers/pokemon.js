@@ -1,25 +1,26 @@
+/*jslint node: true */
 var db = require("../models");
 
 module.exports = {
-	generateBattle: function(trainerInfo) {
+	generateBattle: function (trainerInfo, cb) {
 		var self = this;
 		console.log("Starting battle..");
-		self.getTrainerPoke(trainerInfo);
+		self.getTrainerPoke(trainerInfo, cb);
 	},
-	getTrainerPoke: function(trainerInfo) {
+	getTrainerPoke: function (trainerInfo, cb) {
 		var self = this;
 		db.Pokemon.findOne({
 			where: {
 				number: trainerInfo.pokemon_number
 			}
-			}).then(function(dbPokemon) {
-			poke_Name = dbPokemon.dataValues.name;
-			poke_Level = trainerInfo.level;
-			poke_HP_C = trainerInfo.health_points_current,
-			poke_HP_M = trainerInfo.health_points_max,
-			poke_Atk = trainerInfo.attack,
-			poke_Exp = trainerInfo.experience,
-			poke_Img_Back = dbPokemon.dataValues.img_back
+		}).then(function (dbPokemon) {
+			var poke_Name = dbPokemon.dataValues.name;
+			var poke_Level = trainerInfo.level;
+			var poke_HP_C = trainerInfo.health_points_current;
+			var poke_HP_M = trainerInfo.health_points_max;
+			var poke_Atk = trainerInfo.attack;
+			var poke_Exp = trainerInfo.experience;
+			var poke_Img_Back = dbPokemon.dataValues.img_back;
 			var poke = {
 				name: poke_Name,
 				level: poke_Level,
@@ -28,27 +29,27 @@ module.exports = {
 				atk: poke_Atk,
 				exp: poke_Exp,
 				img_back: poke_Img_Back
-			}
+			};
 			var trainerPoke = poke;
-			self.getRandomPoke(trainerInfo, trainerPoke);
+			self.getRandomPoke(trainerInfo, trainerPoke, cb);
 		});
 	},
-	getRandomPoke: function(trainerInfo, trainerPoke) {
+	getRandomPoke: function (trainerInfo, trainerPoke, cb) {
 		var self = this;
-		randomNumber = Math.floor((Math.random() * 121) + 1);
+		var randomNumber = Math.floor((Math.random() * 25) + 1);
 		console.log(randomNumber);
 		db.Pokemon.findOne({
 			where: {
 				id: randomNumber
 			}
-			}).then(function(dbPokemon) {
-			poke_Name = dbPokemon.dataValues.name;
-			poke_Level = trainerInfo.level;
-			poke_HP_C = trainerInfo.health_points_current,
-			poke_HP_M = trainerInfo.health_points_max,
-			poke_Atk = trainerInfo.attack,
-			poke_Exp = 0,
-			poke_Img_Front = dbPokemon.dataValues.img_front
+		}).then(function (dbPokemon) {
+			var poke_Name = dbPokemon.dataValues.name;
+			var poke_Level = trainerInfo.level;
+			var poke_HP_C = trainerInfo.health_points_current;
+			var poke_HP_M = trainerInfo.health_points_max;
+			var poke_Atk = trainerInfo.attack;
+			var poke_Exp = 0;
+			var poke_Img_Front = dbPokemon.dataValues.img_front;
 			var poke = {
 				name: poke_Name,
 				level: poke_Level,
@@ -57,56 +58,92 @@ module.exports = {
 				atk: poke_Atk,
 				exp: poke_Exp,
 				img_front: poke_Img_Front
-			}
+			};
 			var randomPoke = poke;
-			self.battle(trainerInfo, trainerPoke, randomPoke);
+			self.battle(trainerInfo, trainerPoke, randomPoke, cb);
 		});
 	},
-	battle: function(trainerInfo, trainerPoke, randomPoke) {
-		var results = []
+	battle: function (trainerInfo, trainerPoke, randomPoke, cb) {
+		var self = this;
+		var results = [];
 		var trainerAttackLog = [];
 		var randomPokeAttackLog = [];
+		var expArray = [100, 200, 350, 500, 650, 1150, 1600, 1950, 2600, 3050, 4000, 5000, 6000, 6650, 7650, 8850, 10100, 11350, 12650, 14000, 15800, 17650, 19550, 21500, 23450, 27000, 30650, 34400, 38250, 39850, 43100, 46450, 49850, 53350, 56850, 61150, 65500, 70000, 74550, 79200, 83150, 87200, 91300, 95450, 99650, 106800, 114050, 121450, 129000, 210650];
 		console.log("A battle is happening..");
 		console.log(trainerInfo.name + "'s " + trainerPoke.name + " VS. " + randomPoke.name);
 		var attack = 0;
 		var winner = -1;
 		while (winner == -1) {
-			attack = randomAttack(trainerPoke.level, 6,12);
+			attack = self.randomAttack(trainerPoke.level, 6, 12);
 			if (randomPoke.hp_c - attack <= 0) {
 				winner = 1;
-			}
-			else {
+			} else {
 				trainerPoke.hp_c -= attack;
 				trainerAttackLog.push(attack);
-				attack = randomAttack(randomPoke.level, 6,12);
-				if (trainerPoke.hp_c - attack <=0) {
+				attack = self.randomAttack(randomPoke.level, 6, 12);
+				if (trainerPoke.hp_c - attack <= 0) {
 					winner = 0;
-				}
-				else {
+				} else {
 					randomPoke.hp_c -= attack;
-					randomPokeAttackLog.push(attack)
+					randomPokeAttackLog.push(attack);
 				}
 			}
 		}
 		results.push(trainerAttackLog);
 		results.push(randomPokeAttackLog);
-		batteLog = {
+		var batteLog = {
 			Winner: winner,
 			Results: results,
 			TrainerPokeImgBack: trainerPoke.img_back,
 			RandomPokeImgFront: randomPoke.img_front
-		}
+		};
 		if (winner == 1) {
 			console.log("Congratz! You won!");
-		}
-		else {
+			trainerInfo.experience += 50;
+			console.log(trainerInfo, expArray[trainerInfo.level - 1]);
+			if (trainerInfo.experience >= expArray[trainerInfo.level - 1] && trainerInfo.level != 50) {
+				//Level Up
+				trainerInfo.health_points_max += 2;
+				trainerInfo.level++;
+				console.log("Level Up\n", trainerInfo);
+				db.Trainer.update({
+					level: trainerInfo.level,
+					experience: trainerInfo.experience,
+					health_points_max: trainerInfo.health_points_max
+				}, {
+					where: {
+						id: trainerInfo.id
+					}
+				}).then(function (dbTrainer) {
+					console.log("Handlebars Render", dbTrainer);
+					console.log("Trainer Attacks: " + batteLog.Results[0]);
+					console.log("Random Poke Attacks: " + batteLog.Results[1]);
+					return cb(batteLog);
+				});
+			} else {
+				console.log("Already Level 50 OR You didn't Level Up");
+				db.Trainer.update({
+					experience: trainerInfo.experience
+				}, {
+					where: {
+						id: trainerInfo.id
+					}
+				}).then(function (dbTrainer) {
+					console.log("Handlebars Render", dbTrainer);
+					console.log("Trainer Attacks: " + batteLog.Results[0]);
+					console.log("Random Poke Attacks: " + batteLog.Results[1]);
+					return cb(batteLog);
+				});
+			}
+		} else {
 			console.log("Too bad, you lost!");
+			console.log("Trainer Attacks: " + batteLog.Results[0]);
+			console.log("Random Poke Attacks: " + batteLog.Results[1]);
+			return cb(batteLog);
 		}
-		console.log("Trainer Attacks: " + batteLog.Results[0]);
-		console.log("Random Poke Attacks: " + batteLog.Results[1]);
-		return batteLog;
-		function randomAttack(level, low, high) {
-			return (Math.floor((Math.random() * (high - low) + low) + (5 * (level - 1))));
-		}
+
+	},
+	randomAttack: function (level, low, high) {
+		return (Math.floor((Math.random() * (high - low) + low) + (5 * (level - 1))));
 	}
-}
+};

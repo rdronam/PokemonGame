@@ -11,6 +11,7 @@ module.exports = function(App) {
 				}
 			}).then(function(dbTrainer) {
 				res.json(dbTrainer);
+				//RENDER BATTLE PAGE
 			});
 		}
 	});
