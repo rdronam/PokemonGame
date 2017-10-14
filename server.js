@@ -5,6 +5,8 @@ var PORT = process.env.PORT || 8085;
 
 var db = require("./app/models");
 
+App.set("view engine","ejs")
+
 App.use(bodyParser.json());
 App.use(bodyParser.urlencoded({ extended: true }));
 App.use(bodyParser.text());
