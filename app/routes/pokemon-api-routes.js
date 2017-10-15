@@ -5,7 +5,7 @@ var Pokemon = require("../controllers/pokemon.js");
 module.exports = function (App) {
 	App.get("/battle/:trainerId?", function (req, res) {
 		console.log("HI");
-		res.render("battle.ejs")
+		
 		var trainerId = req.params.trainerId;
 		if (trainerId) {
 			db.Trainer.findOne({
@@ -15,8 +15,8 @@ module.exports = function (App) {
 			}).then(function (dbTrainer) {
 				Pokemon.generateBattle(dbTrainer.dataValues, function (results) {
 					console.log("Results from generateBattle():", results);
-					res.json(results);
-
+					//res.json(results);
+					res.render("battle.ejs",{battleInfo:results});
 				});
 				
 				//res.render(results);
