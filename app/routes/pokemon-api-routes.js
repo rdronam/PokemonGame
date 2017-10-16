@@ -14,7 +14,7 @@ module.exports = function (App) {
 				Pokemon.generateBattle(dbTrainer.dataValues, function (results) {
 					console.log("Results from generateBattle():", results);
 					//res.json(results);
-					res.render("battle.ejs",{battleInfo:results});
+					res.render("battle2.ejs",{battleInfo:results});
 				});
 			});
 		}
