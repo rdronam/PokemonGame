@@ -91,7 +91,7 @@ module.exports = {
 		}
 		results.push(trainerAttackLog);
 		results.push(randomPokeAttackLog);
-		var batteLog = {
+		var battleLog = {
 			Winner: winner,
 			Results: results,
 			TrainerPokeImgBack: trainerPoke.img_back,

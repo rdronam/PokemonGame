@@ -39,7 +39,6 @@ module.exports = function (App) {
 							exp: poke_Exp
 						};
 						var renderObj = poke;
-						console.log(renderObj);
 						res.render("battle.ejs",{profile:renderObj});
 					});
 				} else {
