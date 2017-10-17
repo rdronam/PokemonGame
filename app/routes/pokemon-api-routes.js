@@ -27,6 +27,7 @@ module.exports = function (App) {
 									number: trainerInfo.pokemon_number
 								}
 							}).then(function (dbPokemon) {
+								var train_Num = trainerInfo.id;
 								var train_Name = trainerInfo.name;
 								var poke_Name = dbPokemon.dataValues.name;
 								var poke_Level = trainerInfo.level;
@@ -34,6 +35,7 @@ module.exports = function (App) {
 								var poke_Atk = trainerInfo.attack;
 								var poke_Exp = trainerInfo.experience;
 								var poke = {
+									num:train_Num,
 									name: train_Name,
 									pokemon: poke_Name,
 									level: poke_Level,

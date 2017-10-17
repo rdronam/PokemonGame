@@ -36,7 +36,7 @@ module.exports = {
 	},
 	getRandomPoke: function (trainerInfo, trainerPoke, cb) {
 		var self = this;
-		var randomNumber = Math.floor((Math.random() * 100) + 1);
+		var randomNumber = Math.floor((Math.random() * 25) + 1);
 		console.log(randomNumber);
 		db.Pokemon.findOne({
 			where: {
