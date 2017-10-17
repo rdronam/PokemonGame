@@ -12,8 +12,7 @@
 
       <!--Let browser know website is optimized for mobile-->
       <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <script src="https://code.jquery.com/jquery.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
   </head>
   <nav class="navbar navbar-default">
         <div class="container-fluid">
@@ -40,15 +39,15 @@
   <body background="https://scontent-dft4-1.xx.fbcdn.net/v/t31.0-8/22291409_1795975133763983_8960560511415523558_o.jpg?oh=9e222bf7cc51cc5af88092c8c2d2f375&oe=5A7228BF">
    
     
-
+<!-- Player Stats and Battle Info -->
 
      <div class="row">
       <div class="col s12 m5">
         <div class="card-panel teal panel">
           <span class="white-text">
-          <h3>Player Profile <%= 5+5  %></h3>
-          <p>Player Name : <%= profile.name %></p>
-          <p>Player Pokemon : <%= profile.pokemon %></p>
+          <h3>Player Profile </h3>
+          <p>Player Name : <%= profile.name.toUpperCase() %></p>
+          <p>Player Pokemon : <%= profile.pokemon.toUpperCase() %></p>
           <p>Player Level: <%= profile.level %></p>
           <p>Player Currnet Health Point : <%= profile.hp_c %></p>
           <p>Player Attack: <%= profile.atk %></p>
@@ -62,19 +61,13 @@
           <span class="white-text">
           	<h3>Battle Information</h3>
           		<p>Wins:<%=battleInfo.Winner %></p>
-          		<p>Results:<%=battleInfo.Results %></p>
+          		<div>Results:<%=battleInfo.Results %></div>
           		<p>Player Pokemon:<img src=<%=battleInfo.TrainerPokeImgBack %>></p>
-          		<p>Computer Pokemon:<img src=<%=battleInfo.RandomPokeImgFront %>></p>
+              <p>Computer Pokemon:<img src=<%=battleInfo.RandomPokeImgFront %>></p>
           </span>
         </div>
       </div>
     </div>
-    
-          <!-- <form>
-          <button class="btn btn-default button">Battle</button>
-          </form> -->
-
-   
    
     <div class="container">
       <div class="row">
@@ -97,8 +90,9 @@
     </div>
 
 
-  
-<script type="text/javascript" src="js/battle.js"></script>
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/battle.js"></script>
 
 
   </body>
