@@ -116,9 +116,9 @@ module.exports = {
 					}
 				}).then(function (dbTrainer) {
 					console.log("Handlebars Render", dbTrainer);
-					console.log("Trainer Attacks: " + batteLog.Results[0]);
-					console.log("Random Poke Attacks: " + batteLog.Results[1]);
-					return cb(batteLog);
+					console.log("Trainer Attacks: " + battleLog.Results[0]);
+					console.log("Random Poke Attacks: " + battleLog.Results[1]);
+					return cb(battleLog);
 				});
 			} else {
 				console.log("Already Level 50 OR You didn't Level Up");
@@ -130,16 +130,16 @@ module.exports = {
 					}
 				}).then(function (dbTrainer) {
 					console.log("Handlebars Render", dbTrainer);
-					console.log("Trainer Attacks: " + batteLog.Results[0]);
-					console.log("Random Poke Attacks: " + batteLog.Results[1]);
-					return cb(batteLog);
+					console.log("Trainer Attacks: " + battleLog.Results[0]);
+					console.log("Random Poke Attacks: " + battleLog.Results[1]);
+					return cb(battleLog);
 				});
 			}
 		} else {
 			console.log("Too bad, you lost!");
-			console.log("Trainer Attacks: " + batteLog.Results[0]);
-			console.log("Random Poke Attacks: " + batteLog.Results[1]);
-			return cb(batteLog);
+			console.log("Trainer Attacks: " + battleLog.Results[0]);
+			console.log("Random Poke Attacks: " + battleLog.Results[1]);
+			return cb(battleLog);
 		}
 
 	},
