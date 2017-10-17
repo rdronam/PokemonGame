@@ -20,7 +20,7 @@ module.exports = {
 			var poke_HP_M = trainerInfo.health_points_max;
 			var poke_Atk = trainerInfo.attack;
 			var poke_Exp = trainerInfo.experience;
-			var poke_Img_Back = dbPokemon.dataValues.img_back;
+			var poke_Img_Front = dbPokemon.dataValues.img_front;
 			var poke = {
 				name: poke_Name,
 				level: poke_Level,
@@ -28,7 +28,7 @@ module.exports = {
 				hp_m: poke_HP_M,
 				atk: poke_Atk,
 				exp: poke_Exp,
-				img_back: poke_Img_Back
+				img_front: poke_Img_Front
 			};
 			var trainerPoke = poke;
 			self.getRandomPoke(trainerInfo, trainerPoke, cb);
@@ -36,7 +36,7 @@ module.exports = {
 	},
 	getRandomPoke: function (trainerInfo, trainerPoke, cb) {
 		var self = this;
-		var randomNumber = Math.floor((Math.random() * 25) + 1);
+		var randomNumber = Math.floor((Math.random() * 100) + 1);
 		console.log(randomNumber);
 		db.Pokemon.findOne({
 			where: {
@@ -73,18 +73,28 @@ module.exports = {
 		console.log(trainerInfo.name + "'s " + trainerPoke.name + " VS. " + randomPoke.name);
 		var attack = 0;
 		var winner = -1;
+		var trainerTotalAttack = 0;
+		var randomTotalAttack = 0;
 		while (winner == -1) {
 			attack = self.randomAttack(trainerPoke.level, 6, 12);
 			if (randomPoke.hp_c - attack <= 0) {
+				randomPoke.hp_c = 0;
+				trainerTotalAttack += attack;
+				trainerAttackLog.push(attack);
 				winner = 1;
 			} else {
-				trainerPoke.hp_c -= attack;
+				randomPoke.hp_c -= attack;
+				trainerTotalAttack += attack;
 				trainerAttackLog.push(attack);
 				attack = self.randomAttack(randomPoke.level, 6, 12);
 				if (trainerPoke.hp_c - attack <= 0) {
+					trainerPoke.hp_c = 0;
+					randomTotalAttack += attack;
+					randomPokeAttackLog.push(attack);
 					winner = 0;
 				} else {
-					randomPoke.hp_c -= attack;
+					trainerPoke.hp_c -= attack;
+					randomTotalAttack += attack;
 					randomPokeAttackLog.push(attack);
 				}
 			}
@@ -94,8 +104,12 @@ module.exports = {
 		var battleLog = {
 			Winner: winner,
 			Results: results,
-			TrainerPokeImgBack: trainerPoke.img_back,
-			RandomPokeImgFront: randomPoke.img_front
+			TrainerPokeHpCurrent: trainerPoke.hp_c,
+			TrainerPokeImgFront: trainerPoke.img_front,
+			TrainerTotalAttack: trainerTotalAttack,
+			RandomPokeHpCurrent: randomPoke.hp_c,
+			RandomPokeImgFront: randomPoke.img_front,
+			RandomTotalAttack: randomTotalAttack
 		};
 		if (winner == 1) {
 			console.log("Congratz! You won!");
@@ -109,7 +123,8 @@ module.exports = {
 				db.Trainer.update({
 					level: trainerInfo.level,
 					experience: trainerInfo.experience,
-					health_points_max: trainerInfo.health_points_max
+					health_points_max: trainerInfo.health_points_max,
+					health_points_current: trainerInfo.health_points_max
 				}, {
 					where: {
 						id: trainerInfo.id

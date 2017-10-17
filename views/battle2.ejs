@@ -60,10 +60,15 @@
         <div class="card-panel teal panel">
           <span class="white-text">
           	<h3>Battle Information</h3>
-          		<p>Wins:<%=battleInfo.Winner %></p>
-          		<div>Results:<%=battleInfo.Results %></div>
-          		<p>Player Pokemon:<img src=<%=battleInfo.TrainerPokeImgBack %>></p>
-              <p>Computer Pokemon:<img src=<%=battleInfo.RandomPokeImgFront %>></p>
+          		<p>Wins: <%=battleInfo.Winner %></p>
+          		<p>Player Poke: <img src=<%=battleInfo.TrainerPokeImgFront %>></p>
+              <p>----Poke HP: <%=battleInfo.TrainerPokeHpCurrent %></p>
+              <p>----Total Atk: <%=battleInfo.TrainerTotalAttack %></p>
+              <p>----Attacks: <%=battleInfo.Results[0] %></p>
+              <p>Computer Poke: <img src=<%=battleInfo.RandomPokeImgFront %>></p>
+              <p>----Poke HP: <%=battleInfo.RandomPokeHpCurrent %></p>
+              <p>----Total Atk: <%=battleInfo.RandomTotalAttack %></p>
+              <p>----Attacks: <%=battleInfo.Results[1] %></p>
           </span>
         </div>
       </div>
