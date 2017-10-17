@@ -5,7 +5,8 @@ var Trainer = require("../controllers/pokemon.js");
 module.exports = function (App) {
 	//LOGIN ROUTE
 	App.get("/trainers/:trainerName?", function (req, res) {
-		var trainerName = req.params.trainerName;
+		var trainerName = req.query.trainerName;
+		console.log(trainerName);
 		//if exists
 		if (trainerName) {
 			// Query for trainer in DB
@@ -74,7 +75,7 @@ module.exports = function (App) {
 								exp: poke_Exp
 							};
 							var renderObj = poke;
-							res.render("battle.ejs",{profile:renderObj});
+							res.render("/app/views/battle.ejs",{profile:renderObj});
 						});
 					});
 				}
