@@ -16,6 +16,7 @@ module.exports = function (App) {
 				}
 			}).then(function (dbTrainer) {
 				//IF TRAINER ALREADY EXISTS
+				console.log(dbTrainer);
 				if (dbTrainer !== null) {
 					//res.json(dbTrainer); // Placeholder for Postman
 					var trainerInfo = dbTrainer.dataValues;
@@ -46,7 +47,7 @@ module.exports = function (App) {
 					//SQL TO INSERT AND RENDER
 					var randomPokemon = Math.floor(Math.random() * 151);
 					db.Trainer.create({
-						name: req.params.trainerName,
+						name: req.query.trainerName,
 						pokemon_number: randomPokemon,
 						level: 1,
 						health_points_current: 200,
@@ -75,7 +76,7 @@ module.exports = function (App) {
 								exp: poke_Exp
 							};
 							var renderObj = poke;
-							res.render("/app/views/battle.ejs",{profile:renderObj});
+							res.render("battle.ejs",{profile:renderObj});
 						});
 					});
 				}
