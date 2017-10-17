@@ -46,10 +46,10 @@
       <div class="col s12 m5">
         <div class="card-panel teal panel">
           <span class="white-text">
-          <h3>Player Profile</h3>
-          <p>Player Name : <%= profile.name.toUpperCase() %></p>
-          <p>Player Pokemon : <%= profile.pokemon.toUpperCase() %></p>
-          <p>Player Level: <%= profile.level.toUpperCase() %></p>
+          <h3>Player Profile <%= 5+5  %></h3>
+          <p>Player Name : <%= profile.name %></p>
+          <p>Player Pokemon : <%= profile.pokemon %></p>
+          <p>Player Level: <%= profile.level %></p>
           <p>Player Currnet Health Point : <%= profile.hp_c %></p>
           <p>Player Attack: <%= profile.atk %></p>
           <p>Player Experience : <%= profile.exp %></p>
@@ -57,11 +57,36 @@
           </span>
         </div>
       </div>
+      <div class="col s12 m5">
+        <div class="card-panel teal panel">
+          <span class="white-text">
+          	<h3>Battle Information</h3>
+          		<p>Wins:<%=battleInfo.Winner %></p>
+          		<p>Results:<%=battleInfo.Results %></p>
+          		<p>Player Pokemon:<img src=<%=battleInfo.TrainerPokeImgBack %>></p>
+          		<p>Computer Pokemon:<img src=<%=battleInfo.RandomPokeImgFront %>></p>
+          </span>
+        </div>
+      </div>
+    </div>
+    
+          <!-- <form>
+          <button class="btn btn-default button">Battle</button>
+          </form> -->
+
+   
+   
     <div class="container">
       <div class="row">
         <div class="col-md-2 col-sm-2">
           <a class="btn btn-default" id="walkInGrass">Walk in Grass</a>
         </div>
+      </div>
+      <br>
+      <div class="row">
+       <!--  <div class="col-md-2 col-sm-2">
+          <a class="btn btn-default" href="/viewTrainer">Trainer Profile</a>
+        </div> -->
       </div>
       <br>
       <div class="row">
