@@ -12,11 +12,11 @@
 //}
 //
 $(document).ready(function () {
-	$("#walkInGrass").on("click", function (event) {
-		event.preventDefault();
-		var numText=$(".num").text();
-		numText = numText.slice(numText.lastIndexOf(":")+1);
-		 $.get("/battle/"+numText);
-	});
+//	$("#walkInGrass").on("click", function (event) {
+//		event.preventDefault();
+//		var numText=$(".num").text();
+//		numText = numText.slice(numText.lastIndexOf(":")+1);
+//		 $.get("/battle/"+numText)
+//	});
 });
 	
