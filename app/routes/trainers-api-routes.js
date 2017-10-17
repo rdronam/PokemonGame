@@ -49,7 +49,7 @@ module.exports = function (App) {
 				} else {
 			// NEW TRAINER APPEARS!
 					//SQL TO INSERT AND RENDER
-					var randomPokemon = Math.ceil(Math.random() * 100);
+					var randomPokemon = Math.ceil(Math.random() * 151);
 					db.Trainer.create({
 						name: req.query.trainerName,
 						pokemon_number: randomPokemon,
