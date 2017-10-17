@@ -39,33 +39,10 @@
         <div id="signup">   
           <h1>Sign Up for Free</h1>
           
-          <form action="/" method="post" href="/battle.html">
-          
-          <div class="top-row">
-            <div class="field-wrap">
-              <label>
-                Trainer Name<span class="req">*</span>
-              </label>
-              <input type="text" required autocomplete="off" />
-            </div>
-        
-            <div class="field-wrap" hidden="true">
-              <label>
-                Last Name<span class="req" >*</span>
-              </label>
-              <input type="text"required autocomplete="off"/>
-            </div>
-          </div>
+          <form action="/trainer/" method="get">
+                Trainer name: <input type="text"  name="" ><br>
 
-          <div class="field-wrap" hidden="true">
-            <label>
-              Email Address<span class="req">*</span>
-            </label>
-            <input type="email"required autocomplete="off"/>
-          </div>
-                    
-          <button type="submit" class="button button-block" > <a href="/battle">Get Started</a></button>
-          
+                <input type="submit" value="Submit">
           </form>
 			<!-- <a href="/battle.html"><button>Get Started</button></a> -->
         </div>
@@ -73,33 +50,10 @@
         <div id="login">   
           <h1>Welcome Back!</h1>
           
-          <form action="/" method="post">
+         <form action="/trainer/" method="get">
+                Trainer name: <input type="text" name=""><br>
 
-          <div class="top-row">
-            <div class="field-wrap">
-              <label>
-                Trainer Name<span class="req">*</span>
-              </label>
-              <input type="text" required autocomplete="off" />
-            </div>
-        
-            <div class="field-wrap" hidden="true">
-              <label>
-                Last Name<span class="req">*</span>
-              </label>
-              <input type="text"required autocomplete="off"/>
-            </div>
-          </div>
-          
-            <div class="field-wrap" hidden="true">
-            <label>
-              Email Address<span class="req">*</span>
-            </label>
-            <input type="email"required autocomplete="off"/>
-          </div>
-               
-          <button class="button button-block"/><a href="/battle2">Log In</a></button>
-          
+                <input type="submit" value="Submit">
           </form>
 
         </div>
