@@ -16,7 +16,7 @@ module.exports = function (App) {
 				}
 			}).then(function (dbTrainer) {
 				//IF TRAINER ALREADY EXISTS
-				console.log(dbTrainer);
+				// console.log(dbTrainer);
 				if (dbTrainer !== null) {
 					//res.json(dbTrainer); // Placeholder for Postman
 					var trainerInfo = dbTrainer.dataValues;
@@ -26,6 +26,7 @@ module.exports = function (App) {
 							number: trainerInfo.pokemon_number
 						}
 					}).then(function (dbPokemon) {
+						var train_Num = trainerInfo.id;
 						var train_Name = trainerInfo.name;
 						var poke_Name = dbPokemon.dataValues.name;
 						var poke_Level = trainerInfo.level;
@@ -33,6 +34,7 @@ module.exports = function (App) {
 						var poke_Atk = trainerInfo.attack;
 						var poke_Exp = trainerInfo.experience;
 						var poke = {
+							num:train_Num,
 							name: train_Name,
 							pokemon: poke_Name,
 							level: poke_Level,
@@ -41,11 +43,13 @@ module.exports = function (App) {
 							exp: poke_Exp
 						};
 						var renderObj = poke;
-						res.render("battle.ejs",{profile:renderObj});
+//						console.log({profile: renderObj});
+						res.render("battle.ejs", {profile: renderObj} );
 					});
 				} else {
+			// NEW TRAINER APPEARS!
 					//SQL TO INSERT AND RENDER
-					var randomPokemon = Math.floor(Math.random() * 151);
+					var randomPokemon = Math.ceil(Math.random() * 25);
 					db.Trainer.create({
 						name: req.query.trainerName,
 						pokemon_number: randomPokemon,
@@ -54,13 +58,14 @@ module.exports = function (App) {
 						health_points_max: 200,
 						attack: 50,
 						experience: 0
-					}).then(function (dbTrainer){
+					}).then(function (dbTrainer) {
 						var trainerInfo = dbTrainer.dataValues;
 						db.Pokemon.findOne({
 							where: {
 								number: randomPokemon
 							}
 						}).then(function (dbPokemon) {
+							var train_Num = trainerInfo.id;
 							var train_Name = trainerInfo.name;
 							var poke_Name = dbPokemon.dataValues.name;
 							var poke_Level = trainerInfo.level;
@@ -68,6 +73,7 @@ module.exports = function (App) {
 							var poke_Atk = trainerInfo.attack;
 							var poke_Exp = trainerInfo.experience;
 							var poke = {
+								num:train_Num,
 								name: train_Name,
 								pokemon: poke_Name,
 								level: poke_Level,
@@ -76,7 +82,9 @@ module.exports = function (App) {
 								exp: poke_Exp
 							};
 							var renderObj = poke;
-							res.render("battle.ejs",{profile:renderObj});
+							res.render("battle.ejs", {
+								profile: renderObj
+							});
 						});
 					});
 				}

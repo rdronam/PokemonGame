@@ -18,7 +18,6 @@ module.exports = function (App) {
 							id: trainerId
 						}
 					}).then(function (dbTrainer) {
-						//IF TRAINER ALREADY EXISTS
 						if (dbTrainer !== null) {
 							//res.json(dbTrainer); // Placeholder for Postman
 							var trainerInfo = dbTrainer.dataValues;
