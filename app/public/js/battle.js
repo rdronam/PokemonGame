@@ -4,8 +4,9 @@ $('#matchImg').attr("src", data.photo);
 
 
 $(document).ready(function() {
-	$("#walkInGrass").on("click", generateBattle);
+	$("#walkInGrass").on("click", generateBattle())
 	function generateBattle(event) {
 		event.preventDefault();
+	};
+}
 
-$.get("/battle/1")
