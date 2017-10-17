@@ -42,7 +42,7 @@ module.exports = function (App) {
 									exp: poke_Exp
 								};
 								var profileObj = poke;
-//								res.json({profile:profileObj, battleInfo:results});
+								console.log({profile:profileObj, battleInfo:results});
 								res.render("battle2.ejs",{profile:profileObj, battleInfo:results});
 							});
 						}
